@@ -259,6 +259,8 @@ public class MigrationToolService implements IMigrationToolService {
         // force execute migration in case user copy-past items with diffrent path on the file system and refresh
         // the studio,it may cause bug TDI-19229
         MigrationUtil.removeMigrationTaskById(done, "org.talend.repository.model.migration.FixProjectResourceLink");
+        // force to re-generate all job poms
+        MigrationUtil.removeMigrationTaskById(done, "org.talend.repository.model.migration.GenerateJobPomMigrationTask");
 
         boolean haveAnyBinFolder = false; // to avoid some problems of migration, sometimes
         for (ERepositoryObjectType type : (ERepositoryObjectType[]) ERepositoryObjectType.values()) {
@@ -572,6 +574,11 @@ public class MigrationToolService implements IMigrationToolService {
                     "org.talend.designer.joblet.repository.migration.UnifyPasswordEncryption4ParametersInJobletMigrationTask", //$NON-NLS-1$
                     "org.talend.designer.mapreduce.repository.migration.UnifyPasswordEncryption4ParametersInMRJobMigrationTask", //$NON-NLS-1$
                     "org.talend.repository.mdm.repository.migration.UnifyPasswordEncryption4MDMConnectionMigrationTask", //$NON-NLS-1$
+                    "org.talend.repository.model.migration.EncryptDbPasswordforItemFileMigrationTask", //$NON-NLS-1$
+                    "org.talend.repository.model.migration.EncryptDbPasswordMigrationTask", //$NON-NLS-1$
+                    "org.talend.repository.model.migration.EncryptPasswordInComponentsMigrationTask", //$NON-NLS-1$
+                    "org.talend.repository.model.migration.EncryptPasswordInJobSettingsMigrationTask", //$NON-NLS-1$
+                    "org.talend.repository.model.migration.EncryptPasswordInProjectSettingsMigrationTask", //$NON-NLS-1$
                     "org.talend.repository.model.migration.UnifyPasswordEncryption4ContextMigrationTask", //$NON-NLS-1$
                     "org.talend.repository.model.migration.UnifyPasswordEncryption4DBConnectionMigrationTask", //$NON-NLS-1$
                     "org.talend.repository.model.migration.UnifyPasswordEncryption4LdapConnectionMigrationTask", //$NON-NLS-1$
